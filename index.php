@@ -72,6 +72,12 @@ endforeach;
 echo '</select>';
 echo '</form>';
 $output = $_REQUEST['malaria'];
+$vtipo = '';
+foreach ($arrCombo as $key => $value):
+    if($output == $key){
+         $vtipo = $value;   
+    }
+endforeach;
 echo '';
 echo $output;
 echo '';
@@ -143,7 +149,7 @@ while($row2 = mysqli_fetch_array($result2))
             "<p>" . $row3['resposta'] .
             "</td>";
             
-        } else if($row['codigo'] == $row2['codigo'] && $row['codigo'] == $row3['codigo'] && $row2['codigo'] == $row3['codigo'] && $output == $row3['tipo']){
+        } else if($row['codigo'] == $row2['codigo'] && $row['codigo'] == $row3['codigo'] && $row2['codigo'] == $row3['codigo'] && $vtipo == $row3['tipo']){
             echo "<td> 
             <b>Nome:</b> " . $row['nome'] . 
             "<p><b>Código:</b> " . $row['codigo'] .
