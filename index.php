@@ -39,58 +39,41 @@ inner join malaria.user_evitar user_evitar on user_evitar.usuario = user_escolar
 
 
 
-
+$malaria = '';
 
 $css = file_get_contents('style.css');
 
 echo '<!DOCTYPE html>';
 echo '<html>';
 echo '<head>';
-#echo '<link rel="stylesheet" type="text/css" href="style.css">';
 echo '<style>';
 echo $css;
 echo '</style>';
-/*echo '<style>';
-echo '* {';
-echo 'box-sizing: border-box;';
-echo '}';
-echo '';
-echo '.row {';
-echo 'margin-left:-5px;';
-echo 'margin-right:-5px;';
-echo '}';
-echo '';
-echo '.column {';
-echo 'float: left;';
-echo 'width: 50%;';
-echo 'padding: 5px;';
-echo 'margin-left: 25%;';
-echo '}';
-echo '';
-echo '.row::after {';
-echo 'content: "";';
-echo 'clear: both;';
-echo 'display: table;';
-echo '}';
-echo '';
-echo 'table {';
-echo 'border-collapse: collapse;';
-echo 'border-spacing: 0;';
-echo 'width: 100%;';
-echo 'border: 1px solid #ddd;';
-echo '}';
-echo '';
-echo 'th, td {';
-echo 'text-align: left;';
-echo 'padding: 16px;';
-echo '}';
-echo '';
-echo 'tr:nth-child(even) {';
-echo 'background-color: #f2f2f2;';
-echo '}';
-echo '</style>';*/
 echo '</head>';
 echo '<body>';
+echo '';
+$arrCombo = array(
+    "1" => "P. vivax",
+    "2" => "Plasmodium falciparum",
+    "3" => "P.malariae",
+    "4" => "Mista"
+);
+$valor_selecionado = "1";
+$output = "";
+
+echo '<form name="form1" action="index.php" method="post">';
+echo '<label>Tipo Malária: </label>';
+echo '<select name="malaria" onchange="javascript= document.form1.submit();">';
+echo '<option></option>';
+foreach ($arrCombo as $key => $value):
+    $selected = ($_REQUEST['malaria'] == $key) ? "selected=\"selected\"": null;
+    echo "<option value=\"$key\"  $selected>$value</option>";      
+endforeach;
+echo '</select>';
+echo '</form>';
+$output = $_REQUEST['malaria'];
+echo '';
+echo $output;
 echo '';
 echo '<div class="row">';
 echo '<div class="column">';
@@ -128,7 +111,7 @@ inner join malaria.user_seguir user_seguir on user_seguir.usuario = usuario.codi
 
 while($row2 = mysqli_fetch_array($result2))
 {
-    $result3 = mysqli_query($con, "select usuario.nome, usuario.codigo, concat('<strong>Quantas vezes você já teve malária?</strong>', 
+    $result3 = mysqli_query($con, "select usuario.nome, usuario.codigo, user_tipo.resposta as tipo, concat('<strong>Quantas vezes você já teve malária?</strong>', 
     '<br>', user_vezes.resposta, '<br><br>', '<strong>Qual o tipo de malária você teve?</strong>', '<br>',
     user_tipo.resposta, '<br><br>',
     '<strong>Quanto tempo faz desde a última malária? (meses)</strong>', '<br>', user_tempo.meses, '<br><br>',
@@ -147,7 +130,7 @@ while($row2 = mysqli_fetch_array($result2))
     inner join malaria.user_remedio user_remedio on user_remedio.usuario = usuario.codigo
     ; ");
     while($row3 = mysqli_fetch_array($result3)){
-        if($row['codigo'] == $row2['codigo'] && $row['codigo'] == $row3['codigo'] && $row2['codigo'] == $row3['codigo']){
+        if($row['codigo'] == $row2['codigo'] && $row['codigo'] == $row3['codigo'] && $row2['codigo'] == $row3['codigo'] && empty($output)){
             echo "<td> 
             <b>Nome:</b> " . $row['nome'] . 
             "<p><b>Código:</b> " . $row['codigo'] .
@@ -160,6 +143,18 @@ while($row2 = mysqli_fetch_array($result2))
             "<p>" . $row3['resposta'] .
             "</td>";
             
+        } else if($row['codigo'] == $row2['codigo'] && $row['codigo'] == $row3['codigo'] && $row2['codigo'] == $row3['codigo'] && $output == $row3['tipo']){
+            echo "<td> 
+            <b>Nome:</b> " . $row['nome'] . 
+            "<p><b>Código:</b> " . $row['codigo'] .
+            "<p><b>Data de Nascimento:</b> " . $row['data_nascimento'] .
+            "<p><b>Sexo:</b> " . $row['sexo'] .
+            "<p><b>Endereço:</b> " . $row['endereco'] .
+            "</td>";
+            echo "<td>" . $row['resposta'] . 
+            "<p>" . $row2['resposta'] . 
+            "<p>" . $row3['resposta'] .
+            "</td>";
         }
 }
 }
