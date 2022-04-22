@@ -56,7 +56,9 @@ $arrCombo = array(
     "1" => "P. vivax",
     "2" => "Plasmodium falciparum",
     "3" => "P.malariae",
-    "4" => "Mista"
+    "4" => "Mista",
+    "5" => "Desconheco",
+    "6" => "Prefiro nao responder"
 );
 $valor_selecionado = "1";
 $output = "";
