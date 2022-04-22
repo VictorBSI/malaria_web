@@ -66,7 +66,7 @@ $output = "";
 echo '<form name="form1" action="index.php" method="post">';
 echo '<label>Tipo Malária: </label>';
 echo '<select name="malaria" onchange="javascript= document.form1.submit();">';
-echo '<option></option>';
+echo '<option>Todos</option>';
 foreach ($arrCombo as $key => $value):
     $selected = ($_REQUEST['malaria'] == $key) ? "selected=\"selected\"": null;
     echo "<option value=\"$key\"  $selected>$value</option>";      
@@ -81,7 +81,7 @@ foreach ($arrCombo as $key => $value):
     }
 endforeach;
 echo '';
-echo $output;
+#echo $output;
 echo '';
 echo '<div class="row">';
 echo '<div class="column">';
@@ -138,7 +138,7 @@ while($row2 = mysqli_fetch_array($result2))
     inner join malaria.user_remedio user_remedio on user_remedio.usuario = usuario.codigo
     ; ");
     while($row3 = mysqli_fetch_array($result3)){
-        if($row['codigo'] == $row2['codigo'] && $row['codigo'] == $row3['codigo'] && $row2['codigo'] == $row3['codigo'] && empty($output)){
+        if($row['codigo'] == $row2['codigo'] && $row['codigo'] == $row3['codigo'] && $row2['codigo'] == $row3['codigo'] && (empty($output) || $output == "Todos")){
             echo "<td> 
             <b>Nome:</b> " . $row['nome'] . 
             "<p><b>Código:</b> " . $row['codigo'] .
@@ -164,7 +164,9 @@ while($row2 = mysqli_fetch_array($result2))
             "<p>" . $row3['resposta'] .
             "</td>";
         }
-}
+            
+        
+        }
 }
 
 echo "</tr>";
