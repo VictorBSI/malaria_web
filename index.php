@@ -1,4 +1,12 @@
+<?php 
+    include('dbcon.php');
+    $reference = $database->getReference('malaria');
+    echo $reference->getValue();
+?>
+
 <?php
+
+
 $con=mysqli_connect("localhost","root","","malaria");
 // Check connection
 if (mysqli_connect_errno())
@@ -39,7 +47,7 @@ inner join malaria.user_evitar user_evitar on user_evitar.usuario = user_escolar
 
 
 
-$malaria = '';
+//$malaria = '';
 
 $css = file_get_contents('style.css');
 
@@ -51,6 +59,10 @@ echo $css;
 echo '</style>';
 echo '</head>';
 echo '<body>';
+if(isset($_SESSION['status'])){
+    echo "<h4 class='alert alert-success'>".$_SESSION['status']."</h4>";            
+    unset($_SESSION['status']);
+}
 echo '';
 $arrCombo = array(
     "1" => "P. vivax",
@@ -94,8 +106,6 @@ echo "<table border='1'>
 while($row = mysqli_fetch_array($result))
 {
 echo "<tr>";
-
-
 
 $result2 = mysqli_query($con,"select usuario.nome, usuario.codigo, concat('<strong>Onde a sua casa está localizada?</strong>', '<br>',  user_localizada.resposta, '<br><br>',
 '<strong>Qual a sua ocupação atual?</strong>', '<br>', user_ocupacao.resposta, '<br><br>',
