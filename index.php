@@ -1,7 +1,7 @@
 <?php 
     include('dbcon.php');
     $reference = $database->getReference('malaria');
-    echo $reference->getValue();
+    //echo $reference->getValue();
 ?>
 
 <?php
@@ -85,7 +85,9 @@ foreach ($arrCombo as $key => $value):
 endforeach;
 echo '</select>';
 echo '</form>';
-$output = $_REQUEST['malaria'];
+
+$output = $_REQUEST['malaria']?? null;
+
 $vtipo = '';
 foreach ($arrCombo as $key => $value):
     if($output == $key){
