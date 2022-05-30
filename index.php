@@ -1,13 +1,13 @@
 <?php 
     include('dbcon.php');
-    $reference = $database->getReference('malaria');
-    echo $reference->getValue();
+    //$reference = $database->getReference('malaria');
+    //echo $reference->getValue();
 ?>
 
 <?php
 
 
-$con=mysqli_connect("localhost","root","","malaria");
+$con=mysqli_connect("localhost","root","hugo15","malaria");
 // Check connection
 if (mysqli_connect_errno())
 {
@@ -85,7 +85,7 @@ foreach ($arrCombo as $key => $value):
 endforeach;
 echo '</select>';
 echo '</form>';
-$output = $_REQUEST['malaria'];
+$output = isset($_REQUEST['malaria'])?$_REQUEST['malaria']:null;
 $vtipo = '';
 foreach ($arrCombo as $key => $value):
     if($output == $key){

@@ -47,10 +47,10 @@ echo '';
 echo '<div class="container">';
 echo '<div class="row justify-content-center">';
 echo '<div class="col-md-4">';
-if (isset($_SESSION['status'])) {
+/*if (isset($_SESSION['status'])) {
     echo "<h4 class='alert alert-success'>" . $_SESSION['status'] . "</h4>";
     unset($_SESSION['status']);
-}
+}*/
 echo '<div class="card mt-4">';
 echo '<div class="card-header">';
 echo '<h4>Login Form</h4>';
@@ -63,7 +63,7 @@ echo '<input type="email" name="email" class="form-control">';
 echo '</div>';
 echo '<div class="form-group mb-3">';
 echo '<label for="">Password</label>';
-echo '<input type="password" name="password" class="form-control">';
+echo '<input type="password" name="pass" class="form-control">';
 echo '</div>';
 echo '<div class="form-group mb-3">';
 echo '<button type="submit" name="login_now_btn" class="btn btn-primary">Login Now</button>';
