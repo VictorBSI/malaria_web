@@ -1,37 +1,45 @@
    * { 
-       box-sizing: border-box; ;
+       box-sizing: border-box; 
        } 
     
     .row { 
-       margin-left:-5px; ;
-       margin-right:-5px; ;
+       margin-left:-5px; 
+       margin-right:-5px; 
        } 
         
        .column { 
-       float: left; ;
-       width: 50%; ;
-       padding: 5px; ;
-       margin-left: 25%; ;
+       float: left; 
+       width: 75%; 
+       padding: 5px; 
+       margin-left: 25%; 
        } 
         
-       .row::after { 
-       content: ""; ;
-       clear: both; ;
-       display: table; ;
-       } 
+       /*.row::after { 
+       content: ""; 
+       clear: both; 
+       display: table; 
+       } */
         
        table { 
-       border-collapse: collapse; ;
-       border-spacing: 0; ;
-       width: 100%; ;
-       border: 1px solid #ddd; ;
+       border-collapse: collapse; 
+       border-spacing: 0; 
+       width: 75%; 
+       border: 1px solid #ddd; 
        } 
         
        th, td { 
-       text-align: left; ;
-       padding: 16px; ;
+       text-align: left; 
+       padding: 16px; 
+       
        } 
+       .paciente{
+         width: 10%;
+       }
+       .quest {
+         width: 20%;
+       }
         
        tr:nth-child(even) { 
-       background-color: #f2f2f2; ;
+       background-color: #f2f2f2; 
        } 
+       

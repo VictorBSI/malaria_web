@@ -99,8 +99,8 @@ echo '<div class="row">';
 echo '<div class="column">';
 echo "<table border='1'>
 <tr>
-<th>Paciente</th>
-<th>Questionário</th>
+<th class='paciente'>Paciente</th>
+<th class='quest'>Questionário</th>
 </tr>";
 
 while($row = mysqli_fetch_array($result))
@@ -160,7 +160,7 @@ while($row2 = mysqli_fetch_array($result2))
             "<p>" . $row2['resposta'] . 
             "<p>" . $row3['resposta'] .
             "</td>";
-            
+            echo "</tr>";
         } else if($row['codigo'] == $row2['codigo'] && $row['codigo'] == $row3['codigo'] && $row2['codigo'] == $row3['codigo'] && $vtipo == $row3['tipo']){
             echo "<td> 
             <b>Nome:</b> " . $row['nome'] . 
@@ -174,16 +174,17 @@ while($row2 = mysqli_fetch_array($result2))
             "<p>" . $row3['resposta'] .
             "</td>";
         }
-            
+        echo "</tr>";
         
         }
 }
 
-echo "</tr>";
+
 }
 
 
 echo "</table></br>";
+echo '</div>';
 echo '</div>';
 echo '';
 echo '</body>';
